@@ -37,6 +37,7 @@ pipeline {
             when { branch 'master' }
             steps {
                 script {
+                    echo 'building docker iamges'
                 }
             }
             post {
@@ -56,7 +57,7 @@ pipeline {
     }
     post {
         failure {
-
+            echo 'pipeline failed'
         }
     }
 }
