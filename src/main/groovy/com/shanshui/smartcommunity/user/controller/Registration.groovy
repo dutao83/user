@@ -5,15 +5,12 @@ import com.shanshui.smartcommunity.user.domain.UserRepository
 import com.shanshui.smartcommunity.user.service.DynamicCodeService
 import com.shanshui.smartcommunity.user.service.TokenService
 import com.shanshui.smartcommunity.user.service.exception.UserException
-import jdk.nashorn.internal.parser.Token
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.cache.annotation.CacheEvict
-import org.springframework.cache.annotation.Cacheable
 import org.springframework.cache.annotation.EnableCaching
 import org.springframework.stereotype.Service
-import org.apache.commons.codec.digest.DigestUtils
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
