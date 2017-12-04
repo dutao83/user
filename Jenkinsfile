@@ -31,9 +31,9 @@ pipeline {
         stage('Copy Assembly to build repo') {
             steps {
                 script {
-                    sh """cp ./target/user*.jar ${env.BUILD_REPO_PATH}/user_${
-                        new Date().format('yyyyMMddhhmmssSSS')
-                    }.jar"""
+                    def date = new Date().format('yyyyMMddhhmmssSSS')
+                    sh """cp ./target/user*.jar ${env.BUILD_REPO_PATH}/user_${date}.jar"""
+                    currentBuild.rawBuild.displayName = date
                 }
             }
         }
