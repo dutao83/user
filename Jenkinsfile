@@ -20,7 +20,7 @@ pipeline {
             steps {
                 script {
                     withEnv([
-                            'MVN_HOME=/usr/mvn'
+                            'MVN_HOME=/usr/maven'
                     ]) {
                         sh """${MVN_HOME}/bin/mvn package"""
                     }
