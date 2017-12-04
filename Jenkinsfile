@@ -19,7 +19,11 @@ pipeline {
         stage('Assembly') {
             steps {
                 script {
-                    sh '''mvn package'''
+                    withEnv([
+                            'MVN_HOME=/usr/mvn'
+                    ]) {
+                        sh """${MVN_HOME}/bin/mvn package"""
+                    }
                 }
             }
         }
