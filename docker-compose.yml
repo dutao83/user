@@ -1,0 +1,25 @@
+version: '3'
+services:
+  user:
+    build:
+      context: .
+      dockerfile: user.dockerfile
+      args:
+        buildversion: ${SERVICE_VERSION}
+    depends_on:
+      - db
+      - redis
+  redis:
+    image: registry.docker-cn.com/library/redis:alpine
+    ports:
+      - "6379:6379"
+  db:
+    image: registry.docker-cn.com/library/mysql
+    ports:
+      - "3306:3306"
+    volumes:
+      - /var/lib/mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+
+
