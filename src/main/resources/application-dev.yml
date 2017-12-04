@@ -20,7 +20,6 @@ security:
 spring:
   profilex: dev
   datasource:
-    type: mysql
     driverClassName: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/community
     data: /**/data.sql

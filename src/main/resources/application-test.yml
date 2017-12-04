@@ -18,11 +18,10 @@ security:
     enabled: false
 
 spring:
-  profiles: ci
+  profile: test
   datasource:
-    type: H2
-    driverClassName: org.h2.Driver
-    url: jdbc:h2:mem:community
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://db:3306/community
     data: /**/data.sql
     username: root
     password: password
