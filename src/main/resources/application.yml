@@ -18,25 +18,5 @@ security:
     enabled: false
 
 spring:
-
-  datasource:
-    driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/community
-    data: /**/data.sql
-    username: root
-    password: password
-    useSSL: false
-  jpa:
-    generate-ddl: true
-    hibernate:
-      ddl-auto: create-drop
-  redis:
-    database: 0
-    host: 127.0.0.1
-    port: 6379
-    pool:
-      max-active: 100
-      max-wait: -1
-      max-idle: 20
-      min-idle: 0
-    timeout: 0
+  profiles:
+    active: ci
