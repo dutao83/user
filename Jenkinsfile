@@ -32,7 +32,11 @@ pipeline {
             steps {
                 script {
                     def date = new Date().format('yyyyMMddhhmmssSSS')
-                    sh """cp ./target/user*.jar ${env.BUILD_REPO_PATH}/user_${date}.jar"""
+                    sh """
+yes | cp -rf ./target/user*.jar ${env.BUILD_REPO_PATH}/user_${date}.jar
+yes | cp -rf user.dockerfile ${env.BUILD_REPO_PATH}/
+yes | cp -rf docker-compose.yml ${env.BUILD_REPO_PATH}/
+"""
                     currentBuild.rawBuild.displayName = date
                 }
             }
