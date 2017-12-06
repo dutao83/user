@@ -7,16 +7,16 @@ services:
       args:
         buildversion: ${SERVICE_VERSION}
     links:
-      - db
-      - redis
+      - mysqldb
+      - redisdb
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/community
-      SPRING_REDIS_HOST= redis
-  redis:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/community
+      SPRING_REDIS_HOST= redisdb
+  redisdb:
     image: registry.docker-cn.com/library/redis:alpine
     ports:
       - "6379:6379"
-  db:
+  mysqldb:
     image: registry.docker-cn.com/library/mysql
     ports:
       - "3306:3306"
