@@ -3,4 +3,4 @@ MAINTAINER david.du
 ARG SERVICE_VERSION
 ARG PROFILES_ACTIVE
 COPY ${SERVICE_VERSION} /var/lib/shanshui/user/
-RUN java -jar /var/lib/shanshui/user/${SERVICE_VERSION} --spring.profiles.active=${PROFILES_ACTIVE}
+ENTRYPOINT java -jar /var/lib/shanshui/user/${SERVICE_VERSION} --spring.profiles.active=${PROFILES_ACTIVE}

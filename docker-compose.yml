@@ -6,13 +6,13 @@ services:
       dockerfile: user.dockerfile
       args:
         SERVICE_VERSION: ${SERVICE_VERSION}
+        PROFILES_ACTIVE: test
     links:
       - mysqldb
       - redisdb
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/community
       SPRING_REDIS_HOST: redisdb
-      SPRING_PROFILES_ACTIVE: ci
   redisdb:
     image: registry.docker-cn.com/library/redis:alpine
     ports:
