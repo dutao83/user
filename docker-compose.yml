@@ -10,6 +10,7 @@ services:
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/community
       SPRING_REDIS_HOST: redisdb
+      SERVER_ADDRESS: user
     ports:
       - "18080:8080"
   redisdb:

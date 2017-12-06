@@ -21,7 +21,7 @@ spring:
   profile: test
   datasource:
     driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://mysqldb:3306/community
+    url: jdbc:mysql://localhost:3306/community
     data: /**/data.sql
     username: root
     password: password
@@ -32,7 +32,7 @@ spring:
       ddl-auto: create-drop # here should be update, which is close to production configuration
   redis:
     database: 0
-    host: redisdb
+    host: localhost
     port: 6379
     pool:
       max-active: 100
