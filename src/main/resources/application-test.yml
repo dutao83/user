@@ -1,7 +1,7 @@
 # Server settings (ServerProperties)
 server:
   port: 8080
-  address: 120.55.61.169
+  address: 127.0.0.1
   sessionTimeout: 30
   contextPath: /
 
