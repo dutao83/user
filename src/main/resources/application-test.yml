@@ -21,7 +21,7 @@ spring:
   profile: test
   datasource:
     driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://db:3306/community
+    url: jdbc:mysql://'db':3306/community
     data: /**/data.sql
     username: root
     password: password

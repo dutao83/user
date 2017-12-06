@@ -6,9 +6,12 @@ services:
       dockerfile: user.dockerfile
       args:
         buildversion: ${SERVICE_VERSION}
-    depends_on:
+    links:
       - db
       - redis
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/community
+      SPRING_REDIS_HOST= redis
   redis:
     image: registry.docker-cn.com/library/redis:alpine
     ports:
