@@ -4,9 +4,6 @@ services:
     build:
       context: .
       dockerfile: user.dockerfile
-      args:
-        SERVICE_VERSION: ${SERVICE_VERSION}
-        PROFILES_ACTIVE: test
     links:
       - mysqldb
       - redisdb
