@@ -10,6 +10,8 @@ services:
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/community
       SPRING_REDIS_HOST: redisdb
+    ports:
+      - "8080:8080"
   redisdb:
     image: registry.docker-cn.com/library/redis:alpine
     ports:
