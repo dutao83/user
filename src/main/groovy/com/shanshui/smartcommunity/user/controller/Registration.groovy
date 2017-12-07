@@ -45,6 +45,7 @@ class Registration {
         def code = dynamicCodeService.generateDynamicCode(cellPhone)
         // send the dynamic code here
         dynamicCodeService.sendDynamicCode(cellPhone, code)
+        // temp for test TODO: comment out
         response.addHeader('dynamic-code', code.toString())
     }
 
@@ -52,9 +53,9 @@ class Registration {
      * check if the code is correct by comparing the input with the cached value at server side
      * @param cellPhone
      * @param code
+     * @param user some basic user information should be sent along with the request
      */
     @RequestMapping(value = '/{cellphone}/{code}', method = RequestMethod.PUT)
-    @CacheEvict(value = 'dynamicCode', key = '#cellPhone')
     def register(
             @PathVariable('cellphone') String cellPhone,
             @PathVariable('cellphone') String code, final @RequestBody User user) {
@@ -66,12 +67,19 @@ class Registration {
 
             user.token = tokenService.generateToken(user)
 
-            repository.save(user)
-            LOGGER.info("$cellPhone registered successfully")
+            User usr = repository.save(user)
+            registered(cellPhone, user)
+            return usr
             // return token here
+        } else {
+            // how to deliver error information
+            UserException.WRONG_DYNAMIC_CODE
         }
-        // how to deliver error information
     }
 
+    @CacheEvict(value = 'dynamicCode', key = '#cellPhone')
+    def registered(String cellPhone, User user) {
+        LOGGER.info("$cellPhone registered successfully")
+    }
     private final static Logger LOGGER = LoggerFactory.getLogger(Registration.class)
 }

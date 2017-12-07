@@ -13,4 +13,6 @@ class UserException extends Exception {
     }
 
     public static final UserException USER_REGISTERED = new UserException(1, 'the cellphone number has been registered')
+    public static
+    final UserException WRONG_DYNAMIC_CODE = new UserException(2, 'the dynamic code provided is not correct, please get the code again')
 }
