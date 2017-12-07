@@ -2,7 +2,6 @@ package com.shanshui.smartcommunity.user.service
 
 import com.shanshui.smartcommunity.user.domain.User
 import org.apache.commons.codec.digest.DigestUtils
-import org.springframework.cache.annotation.Cacheable
 import org.springframework.cache.annotation.EnableCaching
 import org.springframework.stereotype.Service
 
@@ -20,7 +19,6 @@ class TokenService {
      * @param deviceId
      * @return
      */
-    @Cacheable(value = 'token', key = '#user.cellphone')
     def generateToken(final User user) {
         if (user == null) {
             throw new IllegalArgumentException('please provide user information to proceed')
