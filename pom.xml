@@ -102,6 +102,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <profiles>
+                        <!--<classifier>exec</classifier>-->
                         <profile>ci</profile>
                     </profiles>
                 </configuration>
@@ -118,6 +119,34 @@
                 <!--</execution>-->
                 <!--</executions>-->
             </plugin>
+            <!--<plugin>-->
+                <!--<artifactId>maven-jar-plugin</artifactId>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<id>exec</id>-->
+                        <!--<phase>package</phase>-->
+                        <!--<goals>-->
+                            <!--<goal>jar</goal>-->
+                        <!--</goals>-->
+                        <!--<configuration>-->
+                            <!--<classifier>exec</classifier>-->
+                        <!--</configuration>-->
+                    <!--</execution>-->
+                    <!--<execution>-->
+                        <!--<phase>package</phase>-->
+                        <!--<goals>-->
+                            <!--<goal>jar</goal>-->
+                        <!--</goals>-->
+                        <!--<configuration>-->
+                            <!--&lt;!&ndash; Need this to ensure application.yml is excluded &ndash;&gt;-->
+                            <!--<forceCreation>true</forceCreation>-->
+                            <!--<excludes>-->
+                                <!--<exclude>application*.yml</exclude>-->
+                            <!--</excludes>-->
+                        <!--</configuration>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+            <!--</plugin>-->
             <plugin>
                 <groupId>pl.project13.maven</groupId>
                 <artifactId>git-commit-id-plugin</artifactId>

@@ -33,6 +33,10 @@ pipeline {
                 script {
                     def date = new Date().format('yyyyMMddhhmmssSSS')
                     sh """
+cd ${env.BUILD_REPO_PATH}
+if[! -d user]; then
+    mkdir user
+fi
 yes | cp -rf ./target/user*.jar ${env.BUILD_REPO_PATH}/user/user.jar
 yes | cp -rf user.dockerfile ${env.BUILD_REPO_PATH}/user
 yes | cp -rf docker-compose.yml ${env.BUILD_REPO_PATH}/user
