@@ -33,7 +33,7 @@ pipeline {
                 script {
                     def date = new Date().format('yyyyMMddhhmmssSSS')
                     sh """
-if[ ! -d ${env.BUILD_REPO_PATH}/user]; then
+if [ ! -d ${env.BUILD_REPO_PATH}/user]; then
     mkdir ${env.BUILD_REPO_PATH}/user
 fi
 yes | cp -rf ./target/user*.jar ${env.BUILD_REPO_PATH}/user/user.jar
