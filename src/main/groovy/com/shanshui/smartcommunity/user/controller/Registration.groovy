@@ -41,7 +41,7 @@ class Registration {
      */
     @RequestMapping(value = '/{cellphone}', method = RequestMethod.GET)
     @ResponseBody
-    def fetchDynamicCode(@PathVariable('cellphone') String cellPhone, HttpServletResponse response) {
+    def fetchDynamicCode(@PathVariable('cellphone') String cellPhone) {
         def user = repository.findByCellPhoneNumber(cellPhone)
         if (user) {
             return UserException.USER_REGISTERED
