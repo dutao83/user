@@ -5,17 +5,18 @@ import com.shanshui.smartcommunity.user.domain.UserRepository
 import com.shanshui.smartcommunity.user.service.DynamicCodeService
 import com.shanshui.smartcommunity.user.service.TokenService
 import com.shanshui.smartcommunity.user.service.exception.UserException
+import io.swagger.annotations.Api
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.cache.annotation.CacheEvict
-import org.springframework.cache.annotation.Cacheable
 import org.springframework.cache.annotation.EnableCaching
 import org.springframework.stereotype.Service
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
+import org.springframework.web.bind.annotation.ResponseBody
 
 import javax.servlet.http.HttpServletResponse
 
@@ -25,6 +26,7 @@ import javax.servlet.http.HttpServletResponse
 @Service(value = 'Registration')
 @RequestMapping("/register")
 @EnableCaching
+@Api(value = "REGISTER API", description = "REST API for user registration", tags = ['Register API'])
 class Registration {
     @Autowired
     UserRepository repository
@@ -38,6 +40,7 @@ class Registration {
      * @param cellPhone
      */
     @RequestMapping(value = '/{cellphone}', method = RequestMethod.GET)
+    @ResponseBody
     def fetchDynamicCode(@PathVariable('cellphone') String cellPhone, HttpServletResponse response) {
         def user = repository.findByCellPhoneNumber(cellPhone)
         if (user) {
@@ -47,7 +50,7 @@ class Registration {
         // send the dynamic code here
         dynamicCodeService.sendDynamicCode(cellPhone, code)
         // temp for test TODO: comment out
-        response.addHeader('dynamic-code', code.toString())
+        code
     }
 
     /**
@@ -56,10 +59,11 @@ class Registration {
      * @param code
      * @param user some basic user information should be sent along with the request
      */
-    @RequestMapping(value = '/{cellphone}/{code}', method = RequestMethod.PUT)
+    @RequestMapping(value = '/{cellphone}/{code}', method = RequestMethod.POST)
+    @ResponseBody
     def register(
             @PathVariable('cellphone') String cellPhone,
-            @PathVariable('cellphone') String code, final @RequestBody User user) {
+            @PathVariable('code') int code, final @RequestBody User user) {
         LOGGER.info("register for user: $cellPhone")
         def benchMark = dynamicCodeService.generateDynamicCode(cellPhone)
         if (code == benchMark) {
@@ -74,7 +78,7 @@ class Registration {
             // return token here
         } else {
             // how to deliver error information
-            UserException.WRONG_DYNAMIC_CODE
+            throw UserException.WRONG_DYNAMIC_CODE
         }
     }
 

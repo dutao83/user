@@ -1,9 +1,9 @@
 package com.shanshui.smartcommunity.user.controller
 
-import com.shanshui.smartcommunity.user.domain.PaymentAccountRepository
 import com.shanshui.smartcommunity.user.domain.User
 import com.shanshui.smartcommunity.user.domain.UserRepository
 import com.shanshui.smartcommunity.user.service.exception.UserException
+import io.swagger.annotations.Api
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration
@@ -19,12 +19,14 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping('/user')
 @EnableAutoConfiguration
 @EnableCaching
+@Api(value = "USER API", description = "REST API for user", tags = ['User API'])
 class UserController {
 
     @Autowired
     UserRepository repository
 
     @RequestMapping(method = RequestMethod.GET)
+    @ResponseBody
     def get(@RequestHeader(value = "token") String token) {
         repository.findAll()
     }
@@ -36,8 +38,9 @@ class UserController {
      * @return
      */
     @RequestMapping(value = '/{id}', method = [RequestMethod.GET])
-    @Cacheable(value = 'user', key = '#id')
-    def get(@PathVariable('id') Long id) {
+    //@Cacheable(value = 'user', key = "'#id'")
+    @ResponseBody
+    def get(@PathVariable('id') long id) {
         id ? repository.findOne(id) : null
     }
 
@@ -47,9 +50,10 @@ class UserController {
      * @return
      */
     @RequestMapping(value = '/{id}/token', method = RequestMethod.GET)
-    @Cacheable(value = 'token', key = '#id')
+    @Cacheable(value = 'token', key = "'#id'")
     // cache
-    def getToken(@PathVariable('id') Long id) {
+    @ResponseBody
+    def getToken(@PathVariable('id') long id) {
         get(id)?.token // cache the token for further request
     }
 
@@ -60,10 +64,11 @@ class UserController {
      * @param user
      * @return
      */
-    @RequestMapping(value = '/{id}', method = RequestMethod.PUT)
+    @RequestMapping(value = '/{id}', method = RequestMethod.POST)
     @CacheEvict(value = 'token', key = '#id')
     // remove cache in case any change happens
-    def put(@PathVariable('id') Long id, @RequestHeader(value = "token") String token, @RequestBody User user) {
+    @ResponseBody
+    def put(@PathVariable('id') long id, @RequestHeader(value = "token") String token, @RequestBody User user) {
         // only user himself could update the information
         if (getToken(id) != token) {
             return UserException.WRONG_TOKEN
@@ -72,6 +77,7 @@ class UserController {
     }
 
     @RequestMapping(value = '/{id}/payment/account', method = RequestMethod.GET)
+    @ResponseBody
     def getPaymentAccounts(@PathVariable('id') Long id, @RequestHeader(value = "token") String token) {
         // only user himself could view the payment information
         if (getToken(id) != token) {
@@ -81,8 +87,9 @@ class UserController {
     }
 
     @RequestMapping(value = '/{id}/payment/account/{pid}', method = RequestMethod.GET)
+    @ResponseBody
     def getPaymentAccount(
-            @PathVariable('id') Long id, @PathVariable('pid') Long pid, @RequestHeader(value = "token") String token) {
+            @PathVariable('id') long id, @PathVariable('pid') Long pid, @RequestHeader(value = "token") String token) {
         // only user himself could view the payment information
         if (getToken(id) != token) {
             return UserException.WRONG_TOKEN

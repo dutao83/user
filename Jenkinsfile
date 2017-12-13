@@ -36,7 +36,7 @@ pipeline {
 if [ ! -d ${env.BUILD_REPO_PATH}/user ]; then
     mkdir ${env.BUILD_REPO_PATH}/user
 fi
-yes | cp -rf ./target/user*.jar ${env.BUILD_REPO_PATH}/user/user.jar
+yes | cp -rf ./target/user*exec.jar ${env.BUILD_REPO_PATH}/user/user.jar
 yes | cp -rf user.dockerfile ${env.BUILD_REPO_PATH}/user
 yes | cp -rf docker-compose.yml ${env.BUILD_REPO_PATH}/user
 """
