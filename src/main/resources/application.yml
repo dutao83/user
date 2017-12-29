@@ -17,6 +17,11 @@ security:
   basic:
     enabled: false
 eureka:
+  instance:
+    hostname: ${spring.cloud.client.ipAddress}
+    preferIpAddress:  false
+    ipAddress: 127.0.0.1
+    instance-id:  ${spring.cloud.client.ipAddress}:${server.port}
   client:
     healthcheck:
       enabled: true
@@ -24,6 +29,9 @@ eureka:
       defaultZone:  http://localhost:8761/eureka/
 
 spring:
+  cloud:
+    client:
+      ipAddress: 127.0.0.1
   application:
     name: user
   profiles:
