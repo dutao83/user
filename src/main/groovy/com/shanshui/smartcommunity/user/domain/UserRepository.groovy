@@ -13,4 +13,7 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
     @Query('select u from User u where u.token = :token')
     User findByToken(String token)
+
+    @Query('select u from User u where u.id in ?1')
+    List<User> getUsers(List<Long> ids)
 }

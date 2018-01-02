@@ -27,10 +27,15 @@ class UserController {
 
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
-    def get(@RequestHeader(value = "token") String token) {
+    def get() {
         repository.findAll()
     }
 
+    @RequestMapping(method = RequestMethod.GET)
+    @ResponseBody
+    def get(@RequestBody List<Long> ids) {
+        return repository.getUsers(ids)
+    }
     /**
      * internal used for services
      * @param id
