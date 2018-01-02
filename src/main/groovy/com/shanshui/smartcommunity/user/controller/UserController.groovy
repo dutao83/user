@@ -31,7 +31,7 @@ class UserController {
         repository.findAll()
     }
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
     def get(@RequestBody List<Long> ids) {
         return repository.getUsers(ids)
