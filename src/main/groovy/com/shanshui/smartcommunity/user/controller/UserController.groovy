@@ -1,5 +1,6 @@
 package com.shanshui.smartcommunity.user.controller
 
+import com.shanshui.smartcommunity.user.client.UserClient
 import com.shanshui.smartcommunity.user.domain.User
 import com.shanshui.smartcommunity.user.domain.UserRepository
 import com.shanshui.smartcommunity.user.service.exception.UserException
@@ -20,7 +21,7 @@ import org.springframework.web.bind.annotation.*
 @EnableAutoConfiguration
 @EnableCaching
 @Api(value = "USER API", description = "REST API for user", tags = ['User API'])
-class UserController {
+class UserController implements UserClient {
 
     @Autowired
     UserRepository repository
