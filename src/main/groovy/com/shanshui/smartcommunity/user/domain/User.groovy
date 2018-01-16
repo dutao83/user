@@ -1,17 +1,6 @@
 package com.shanshui.smartcommunity.user.domain
 
-import com.fasterxml.jackson.annotation.JsonProperty
-import org.hibernate.annotations.IndexColumn
-
-import javax.persistence.CascadeType
-import javax.persistence.Column
-import javax.persistence.Entity
-import javax.persistence.FetchType
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
-import javax.persistence.OneToMany
-import javax.persistence.OrderColumn
+import javax.persistence.*
 
 /**
  * Created by I336253 on 11/19/2017.

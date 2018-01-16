@@ -12,8 +12,15 @@ class PaymentAccount implements Serializable {
     Long id
 
     @Enumerated(EnumType.STRING)
-    PaymentChannel type
+    PaymentChannel channel
     String accountNumber
     @ManyToOne(fetch = FetchType.EAGER)
     User owner
+
+    @Enumerated(EnumType.STRING)
+    AccountType type
+    enum AccountType {
+        ENTERPRISE,
+        PERSONAL
+    }
 }
