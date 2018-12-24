@@ -18,14 +18,7 @@ pipeline {
     stages {
         stage('Assembly') {
             steps {
-                script {
-                    withEnv([
-                            'MVN_HOME=/usr/maven'
-                    ]) {
-                        //sh """${MVN_HOME}/bin/mvn install"""
-                        echo "assembly success"
-                    }
-                }
+                echo "success"
             }
         }
 
