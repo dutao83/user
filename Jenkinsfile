@@ -1,5 +1,5 @@
 #!/usr/bin/env groovy
-@Library('cdl/cdl-legacy@master') _
+@Library('cdl@master') _
 
 pipeline {
     agent {
