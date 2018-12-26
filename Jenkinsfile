@@ -19,6 +19,10 @@ pipeline {
     stages {
         stage('Assembly') {
             steps {
+                maven {
+                    mavenHome = '/usr/maven'
+                    cmd = '-version'
+                }
                 echo "success"
             }
         }
