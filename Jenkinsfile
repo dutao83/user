@@ -22,7 +22,7 @@ pipeline {
                 script{
                     maven {
                         mavenHome = '/usr/maven'
-                        cmd = '-version'
+                        cmd = 'package'
                     }
                     echo "success"
                 }                
